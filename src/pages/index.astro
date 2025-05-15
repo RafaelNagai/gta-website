@@ -42,11 +42,11 @@ import "./index.css";
 			gsap.set(".title_logo__vi", {
 				opacity: "0",
 			});
-
+			
 			gsap.set(".title_background__white", {
 				opacity: "0",
 			});
-
+			
 			gsap.set(".title_background__logo", {
 				opacity: "1",
 			});
@@ -96,7 +96,11 @@ import "./index.css";
 			});
 
 			gsap.to(".title_logo__vi", {
-				opacity: 1,
+				opacity: "1",
+				WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 100%)",
+				maskImage: "linear-gradient(to bottom, transparent 0%, black 100%)",
+				maskPosition: "0px -200px",
+				ease: "power2.out",
 				scrollTrigger: {
 					trigger: ".title_logo_vi",
 					start: "top+=2000 top",

@@ -35,10 +35,13 @@ body {
 .title_logo__vi {
   background-image: url(logo_vi.webp);
   background-size: 40vh;
-  background-position-x: 47%;
+  background-position: 50% 47%;
   height: 100vh;
   width: 100%;
   background-repeat: no-repeat;
+  position: absolute;
+  bottom: 1%;
+  left: 0;
 }
 
 .title_background {
@@ -50,12 +53,14 @@ body {
   background-attachment: fixed;
   background-repeat: no-repeat;
 }
+
 .title_background__white {
   display: block;
   background-color: white;
   width: 100%;
   height: 100%;
 }
+
 .title_background__logo {
   position: fixed;
   top: 0;

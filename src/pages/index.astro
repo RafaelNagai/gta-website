@@ -13,8 +13,8 @@ import "./index.css";
 					</div>
 					<div class="title_background__logo" />
 				</div>
-				<div class="title_logo__vi"></div>
 			</div>
+			<div class="title_logo__vi"></div>
 		</div>
 	</div>
 </Layout>
@@ -34,7 +34,13 @@ import "./index.css";
 				backgroundPositionX: "50%",
 				maskPosition: "50% 50%",
 				backgroundRepeat: "no-repeat",
-				y: "0"
+				top: "0",
+				height: "100vh",
+				width: "100%",
+			});
+
+			gsap.set(".title_logo__vi", {
+				opacity: "0",
 			});
 
 			gsap.set(".title_background__white", {
@@ -51,7 +57,7 @@ import "./index.css";
 				wrapper: "#smooth-wrapper",  // wrapper fixo (geralmente <body> ou um container)
 				content: ".title_container",  // conteúdo que vai rolar suavemente
 				smooth: 1.5,                  // quanto maior, mais inércia (1.5 ~ 2.5 é legal)
-				effects: true                // permite efeitos de paralaxe/scroll-linked
+				effects: false                // permite efeitos de paralaxe/scroll-linked
 			});
 
 			gsap.to(".title_background__white", {
@@ -59,7 +65,7 @@ import "./index.css";
 				scrollTrigger: {
 					trigger: ".title_background__white",
 					start: "top top",
-					end: "+=3000",
+					end: "+=2000",
 					scrub: true,
 				},
 			});
@@ -69,7 +75,7 @@ import "./index.css";
 				scrollTrigger: {
 					trigger: ".title_logo",
 					start: "top top",
-					end: "+=1000",
+					end: "+=700",
 					scrub: true,
 				},
 			});
@@ -85,8 +91,18 @@ import "./index.css";
 					end: "+=2000",
 					scrub: true,
 					pin: true,
-					pinSpacing: true
+					pinSpacing: true,
 				},
+			});
+
+			gsap.to(".title_logo__vi", {
+				opacity: 1,
+				scrollTrigger: {
+					trigger: ".title_logo_vi",
+					start: "top+=2000 top",
+					end: "+=2000",
+					scrub: true,
+				}
 			});
 		}
 
@@ -95,10 +111,10 @@ import "./index.css";
 		
 		ScrollTrigger.create({
 			trigger: ".title_logo",
-			start: "center 30%",
-			end: "+=4000",
+			start: "center 49%",
+			end: "+=3000",
 			pin: true,
 			pinSpacing: true
-		})
+		});
 	});
 </script>

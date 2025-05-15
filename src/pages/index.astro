@@ -1,11 +1,104 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "./index.css";
 ---
 
 <Layout>
-	<Welcome />
+	<div id="smooth-wrapper">
+		<div id="smooth-content">
+			<div class="title_container">
+				<div class="title_logo">
+					<div class="title_background">
+						<div class="title_background__white" />
+					</div>
+					<div class="title_background__logo" />
+				</div>
+				<div class="title_logo__vi"></div>
+			</div>
+		</div>
+	</div>
 </Layout>
+
+<script>
+	import { gsap } from "gsap";
+	import { ScrollTrigger } from "gsap/ScrollTrigger";
+	import { ScrollSmoother } from "gsap/ScrollSmoother";
+
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+	document.addEventListener("DOMContentLoaded", () => {
+		const setProperties = () => {
+			gsap.set(".title_logo", {
+				maskSize: "7000vh",
+				backgroundSize: "7000vh",
+				backgroundPositionX: "50%",
+				maskPosition: "50% 50%",
+				backgroundRepeat: "no-repeat",
+				y: "0"
+			});
+
+			gsap.set(".title_background__white", {
+				opacity: "0",
+			});
+
+			gsap.set(".title_background__logo", {
+				opacity: "1",
+			});
+		}
+
+		const setTransitionAnimation = () => {
+			ScrollSmoother.create({
+				wrapper: "#smooth-wrapper",  // wrapper fixo (geralmente <body> ou um container)
+				content: ".title_container",  // conteúdo que vai rolar suavemente
+				smooth: 1.5,                  // quanto maior, mais inércia (1.5 ~ 2.5 é legal)
+				effects: true                // permite efeitos de paralaxe/scroll-linked
+			});
+
+			gsap.to(".title_background__white", {
+				opacity: "1",
+				scrollTrigger: {
+					trigger: ".title_background__white",
+					start: "top top",
+					end: "+=3000",
+					scrub: true,
+				},
+			});
+
+			gsap.to(".title_background__logo", {
+				opacity: "0",
+				scrollTrigger: {
+					trigger: ".title_logo",
+					start: "top top",
+					end: "+=1000",
+					scrub: true,
+				},
+			});
+			
+			gsap.to(".title_logo", {
+				maskSize: "40vh",
+				maskPosition: "50% 47%",
+				backgroundSize: "40vh",
+				backgroundPositionX: "47%",
+				scrollTrigger: {
+					trigger: ".title_logo",
+					start: "top top",
+					end: "+=2000",
+					scrub: true,
+					pin: true,
+					pinSpacing: true
+				},
+			});
+		}
+
+		setProperties();
+		setTransitionAnimation();
+		
+		ScrollTrigger.create({
+			trigger: ".title_logo",
+			start: "center 30%",
+			end: "+=4000",
+			pin: true,
+			pinSpacing: true
+		})
+	});
+</script>
